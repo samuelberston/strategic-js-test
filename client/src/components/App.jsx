@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import css from './App.modules.css';
+
 import Account from './Account.jsx';
 
 class App extends React.Component {
@@ -55,29 +57,35 @@ class App extends React.Component {
 
   selectAll() {
     const { accounts, selected } = this.state;
+
+    // unselected all
     if (accounts.length === selected.length) {
       this.setState({
         selected: [],
+        total: 0,
       });
       this.setState({
         allSelected: false,
       });
+    // select all
     } else {
       const tmp = [];
+      let tmp2 = 0;
 
       accounts.forEach((account) => {
         tmp.push(account.id);
+        tmp2 += account.balance;
       });
 
       this.setState({
         selected: tmp,
+        total: tmp2,
       });
 
       this.setState({
         allSelected: true,
       });
     }
-    this.calculateTotal();
   }
 
   calculateTotal() {
@@ -105,30 +113,30 @@ class App extends React.Component {
         <h1>
           Account Data
         </h1>
-        <div id="dataTable">
-          <div id="columns">
-            <div id="selectAll">
+        <div id="dataTable" className={css.dataTable}>
+          <div id="columns" className={css.columns}>
+            <div id={css.selectAll} className={css.column}>
               <div role="button" id="selectAll" onClick={this.selectAll} onKeyPress={this.selectAll} tabIndex={0}>
                 <input type="checkbox" />
               </div>
             </div>
-            <div id="creditor">
+            <div id="creditor" className={css.column}>
               Creditor
             </div>
-            <div id="firstName">
+            <div id="firstName" className={css.column}>
               First Name
             </div>
-            <div id="lastName">
+            <div id="lastName" className={css.column}>
               Last Name
             </div>
-            <div id="minPay%">
+            <div id="minPay%" className={css.column}>
               Min Pay %
             </div>
-            <div id="balance">
+            <div id="balance" className={css.column}>
               Balance
             </div>
           </div>
-          <div id="accountData">
+          <div id="accountData" className={css.accountData}>
             {accounts
               ? (
                 accounts.map((account) => (
@@ -136,7 +144,7 @@ class App extends React.Component {
                 )))
               : ''}
           </div>
-          <div id="totals">
+          <div id="totals" className={css.totals}>
             <div id="totalRows">
               Total Row Count:
               &nbsp;
@@ -151,6 +159,7 @@ class App extends React.Component {
               Total Balance:
               &nbsp;
               {total}
+              .00
             </div>
           </div>
         </div>

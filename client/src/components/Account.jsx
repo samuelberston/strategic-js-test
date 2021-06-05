@@ -1,6 +1,8 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
+import css from './Account.module.css';
+
 const Account = ({ account, select, allSelected }) => {
   const {
     id,
@@ -11,32 +13,34 @@ const Account = ({ account, select, allSelected }) => {
     balance,
   } = account;
   return (
-    <div id={id}>
+    <div id={id} className={css.account}>
       {allSelected
         ? (
-          <div role="button" id="select" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
+          <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
             <input type="checkbox" value={id} checked />
           </div>
         )
         : (
-          <div role="button" id="select" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
+          <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
             <input type="checkbox" value={id} />
           </div>
         )}
-      <div id="creditor">
+      <div id="creditor" className={css.column}>
         {creditorName}
       </div>
-      <div id="firstName">
+      <div id="firstName" className={css.column}>
         {firstName}
       </div>
-      <div id="lastName">
+      <div id="lastName" className={css.column}>
         {lastName}
       </div>
-      <div id="minPay%">
+      <div id="minPay%" className={css.column}>
         {minPaymentPercentage}
+        %
       </div>
-      <div id="balance">
+      <div id="balance" className={css.column}>
         {balance}
+        .00
       </div>
     </div>
   );

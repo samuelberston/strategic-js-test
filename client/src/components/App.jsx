@@ -18,6 +18,7 @@ class App extends React.Component {
     this.select = this.select.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
     this.selectAll = this.selectAll.bind(this);
+    this.addDebt = this.addDebt.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,7 @@ class App extends React.Component {
       selected.splice(id, 1);
       this.setState({
         selected,
+        allSelected: false,
       });
     } else {
       accounts.forEach((account) => {
@@ -103,6 +105,13 @@ class App extends React.Component {
     });
   }
 
+  addDebt(account) {
+    const { accounts } = this.state;
+    this.setState = {
+      accounts: accounts.push(account),
+    };
+  }
+
   render() {
     const {
       accounts, selected, total, allSelected,
@@ -116,7 +125,12 @@ class App extends React.Component {
           <div id="columns" className={css.columns}>
             <div id={css.selectAll} className={css.column}>
               <div role="button" id="selectAll" onClick={this.selectAll} onKeyPress={this.selectAll} tabIndex={0}>
-                <input type="checkbox" />
+                {allSelected
+                  ? (
+                    <input type="checkbox" checked />
+                  ) : (
+                    <input type="checkbox" />
+                  )}
               </div>
             </div>
             <div id="creditor" className={css.column}>
@@ -138,9 +152,17 @@ class App extends React.Component {
           <div id="accountData" className={css.accountData}>
             {accounts
               ? (
-                accounts.map((account) => (
-                  <Account account={account} select={this.select} allSelected={allSelected} />
-                )))
+                accounts.map((account) => {
+                  let checked;
+                  if (!selected.includes(account.id)) {
+                    checked = false;
+                  } else {
+                    checked = true;
+                  }
+                  return (
+                    <Account account={account} select={this.select} checked={checked} />
+                  );
+                }))
               : ''}
           </div>
           <div id="totals" className={css.totals}>
@@ -155,8 +177,7 @@ class App extends React.Component {
               {selected.length}
             </div>
             <div id="totalBalance">
-              Total Balance:
-              &nbsp;
+              Total Balance: $
               {total}
               .00
             </div>

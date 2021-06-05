@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './Account.module.css';
 
-const Account = ({ account, select, allSelected }) => {
+const Account = ({ account, select, checked }) => {
   const {
     id,
     creditorName,
@@ -13,7 +13,7 @@ const Account = ({ account, select, allSelected }) => {
   } = account;
   return (
     <div id={id} className={css.account}>
-      {allSelected
+      {checked
         ? (
           <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
             <input type="checkbox" value={id} checked />
@@ -38,6 +38,7 @@ const Account = ({ account, select, allSelected }) => {
         %
       </div>
       <div id="balance" className={css.column}>
+        $
         {balance}
         .00
       </div>
@@ -48,7 +49,7 @@ const Account = ({ account, select, allSelected }) => {
 Account.propTypes = {
   account: PropTypes.objectOf(PropTypes.any).isRequired,
   select: PropTypes.func.isRequired,
-  allSelected: PropTypes.bool.isRequired,
+  checked: PropTypes.bool.isRequired,
 };
 
 export default Account;

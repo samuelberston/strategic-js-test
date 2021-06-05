@@ -12,4 +12,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', router);
 
-app.listen(port, () => console.log(`App listening at port ${port}`));
+const server = app.listen(port, () => console.log(`App listening at port ${port}`));
+
+module.exports = {
+  server,
+  app,
+};

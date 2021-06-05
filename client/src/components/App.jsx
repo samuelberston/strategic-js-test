@@ -7,9 +7,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      accounts: null,
+      accounts: [],
       selected: [],
-      total: null,
+      total: 0,
     };
     this.getAccounts = this.getAccounts.bind(this);
     this.select = this.select.bind(this);
@@ -67,7 +67,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { accounts } = this.state;
+    const { accounts, selected, total } = this.state;
     return (
       <div>
         <h1>
@@ -91,12 +91,31 @@ class App extends React.Component {
               Balance
             </div>
           </div>
-          {accounts
-            ? (
-              accounts.map((account) => (
-                <Account account={account} select={this.select} />
-              )))
-            : ''}
+          <div id="accountData">
+            {accounts
+              ? (
+                accounts.map((account) => (
+                  <Account account={account} select={this.select} />
+                )))
+              : ''}
+          </div>
+          <div id="totals">
+            <div id="totalRows">
+              Total Row Count:
+              &nbsp;
+              {accounts.length}
+            </div>
+            <div id="totalChecked">
+              Check Row Count:
+              &nbsp;
+              {selected.length}
+            </div>
+            <div id="totalBalance">
+              Total Balance:
+              &nbsp;
+              {total}
+            </div>
+          </div>
         </div>
       </div>
     );

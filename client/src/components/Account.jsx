@@ -12,7 +12,7 @@ const Account = ({ account, select }) => {
   } = account;
   return (
     <div id={id}>
-      <div id="select" onClick={select} value={id}>
+      <div role="button" id="select" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
         <input type="checkbox" value={id} />
       </div>
       <div id="creditor">

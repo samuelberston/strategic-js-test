@@ -4,6 +4,7 @@ import axios from 'axios';
 import css from './App.module.css';
 
 import Account from './Account.jsx';
+import AddDebt from './AddDebt.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,11 +14,13 @@ class App extends React.Component {
       selected: [],
       total: 0,
       allSelected: false,
+      addDebtClicked: false,
     };
     this.getAccounts = this.getAccounts.bind(this);
     this.select = this.select.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
     this.selectAll = this.selectAll.bind(this);
+    this.addDebtClick = this.addDebtClick.bind(this);
     this.addDebt = this.addDebt.bind(this);
   }
 
@@ -105,16 +108,28 @@ class App extends React.Component {
     });
   }
 
-  addDebt(account) {
+  addDebtClick() {
+    const { addDebtClicked } = this.state;
+    this.setState({
+      addDebtClicked: !addDebtClicked,
+    });
+  }
+
+  addDebt(e, account) {
+    e.preventDefault();
     const { accounts } = this.state;
-    this.setState = {
-      accounts: accounts.push(account),
-    };
+    account.id = accounts.length + 1;
+    account.balance = Number(account.balance);
+    accounts.push(account);
+    this.setState({
+      accounts,
+    });
+    console.log(accounts);
   }
 
   render() {
     const {
-      accounts, selected, total, allSelected,
+      accounts, selected, total, allSelected, addDebtClicked,
     } = this.state;
     return (
       <div id="app">
@@ -133,7 +148,7 @@ class App extends React.Component {
                   )}
               </div>
             </div>
-            <div id="creditor" className={css.column}>
+            <div id="creditorName" className={css.column}>
               Creditor
             </div>
             <div id="firstName" className={css.column}>
@@ -181,6 +196,26 @@ class App extends React.Component {
               {total}
               .00
             </div>
+          </div>
+          <div id="addDebtContainer">
+            {
+              !addDebtClicked
+                ? (
+                  <button type="button" onClick={this.addDebtClick}>
+                    Add Debt
+                  </button>
+                ) : (
+                  <button type="button" onClick={this.addDebtClick}>
+                    Nevermind
+                  </button>
+                )
+            }
+            {
+              addDebtClicked
+                ? (
+                  <AddDebt addDebt={this.addDebt} />
+                ) : ''
+            }
           </div>
         </div>
       </div>

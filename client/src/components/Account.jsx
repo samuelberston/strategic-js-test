@@ -1,7 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-const Account = ({ account, select }) => {
+const Account = ({ account, select, allSelected }) => {
   const {
     id,
     creditorName,
@@ -12,9 +12,17 @@ const Account = ({ account, select }) => {
   } = account;
   return (
     <div id={id}>
-      <div role="button" id="select" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
-        <input type="checkbox" value={id} />
-      </div>
+      {allSelected
+        ? (
+          <div role="button" id="select" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
+            <input type="checkbox" value={id} checked />
+          </div>
+        )
+        : (
+          <div role="button" id="select" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
+            <input type="checkbox" value={id} />
+          </div>
+        )}
       <div id="creditor">
         {creditorName}
       </div>

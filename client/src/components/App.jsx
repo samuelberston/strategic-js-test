@@ -10,14 +10,17 @@ class App extends React.Component {
       accounts: [],
       selected: [],
       total: 0,
+      allSelected: false,
     };
     this.getAccounts = this.getAccounts.bind(this);
     this.select = this.select.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
+    this.selectAll = this.selectAll.bind(this);
   }
 
   componentDidMount() {
     this.getAccounts();
+    this.calculateTotal();
   }
 
   getAccounts() {
@@ -39,7 +42,6 @@ class App extends React.Component {
       });
     } else {
       accounts.forEach((account) => {
-        console.log(typeof e.target.value, typeof account.id);
         if (Number(e.target.value) === Number(account.id)) {
           selected.push(account.id);
           this.setState({
@@ -51,7 +53,35 @@ class App extends React.Component {
     this.calculateTotal();
   }
 
+  selectAll() {
+    const { accounts, selected } = this.state;
+    if (accounts.length === selected.length) {
+      this.setState({
+        selected: [],
+      });
+      this.setState({
+        allSelected: false,
+      });
+    } else {
+      const tmp = [];
+
+      accounts.forEach((account) => {
+        tmp.push(account.id);
+      });
+
+      this.setState({
+        selected: tmp,
+      });
+
+      this.setState({
+        allSelected: true,
+      });
+    }
+    this.calculateTotal();
+  }
+
   calculateTotal() {
+    console.log('calc');
     let total = 0;
     const { selected, accounts } = this.state;
 
@@ -67,7 +97,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { accounts, selected, total } = this.state;
+    const {
+      accounts, selected, total, allSelected,
+    } = this.state;
     return (
       <div>
         <h1>
@@ -75,6 +107,11 @@ class App extends React.Component {
         </h1>
         <div id="dataTable">
           <div id="columns">
+            <div id="selectAll">
+              <div role="button" id="selectAll" onClick={this.selectAll} onKeyPress={this.selectAll} tabIndex={0}>
+                <input type="checkbox" />
+              </div>
+            </div>
             <div id="creditor">
               Creditor
             </div>
@@ -95,7 +132,7 @@ class App extends React.Component {
             {accounts
               ? (
                 accounts.map((account) => (
-                  <Account account={account} select={this.select} />
+                  <Account account={account} select={this.select} allSelected={allSelected} />
                 )))
               : ''}
           </div>

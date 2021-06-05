@@ -1,6 +1,5 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import css from './Account.module.css';
 
 const Account = ({ account, select, allSelected }) => {
@@ -49,6 +48,7 @@ const Account = ({ account, select, allSelected }) => {
 Account.propTypes = {
   account: PropTypes.objectOf(PropTypes.any).isRequired,
   select: PropTypes.func.isRequired,
+  allSelected: PropTypes.bool.isRequired,
 };
 
 export default Account;

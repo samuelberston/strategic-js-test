@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import css from './App.modules.css';
+import css from './App.module.css';
 
 import Account from './Account.jsx';
 
@@ -89,7 +89,6 @@ class App extends React.Component {
   }
 
   calculateTotal() {
-    console.log('calc');
     let total = 0;
     const { selected, accounts } = this.state;
 
@@ -109,7 +108,7 @@ class App extends React.Component {
       accounts, selected, total, allSelected,
     } = this.state;
     return (
-      <div>
+      <div id="app">
         <h1>
           Account Data
         </h1>

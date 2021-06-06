@@ -2,29 +2,34 @@
   display: flex;
   width: 700px;
   flex-direction: column;
-  border: 1px solid black;
+  border: 2px solid rgb(4, 6, 29);
+  border-radius: 5px;
+  background-color: rgb(238, 238, 238);
 }
 
 .columns {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  MARGIN: 7px;
+  margin: 7px;
+  margin-left: 10px;
 }
 
 .column {
   width: 110px;
-  padding: 2px;
+  padding: 3px;
   margin: 2px;
   border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 #selectAll {
   border: none;
   width: 30px;
+  background-color: rgb(238, 238, 238);
 }
 
 .accountData {

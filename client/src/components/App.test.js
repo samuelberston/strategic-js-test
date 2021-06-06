@@ -1,7 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import { JSDOM } from 'jsdom';
-import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
 
@@ -14,5 +13,13 @@ global.window = doc.defaultView;
 it('should render the app', () => {
   const wrapper = shallow(<App />);
   const app = wrapper.find('#app');
+  const dataTable = wrapper.find('#dataTable');
+  const columns = wrapper.find('#columns');
+  const accountData = wrapper.find('#accountData');
+  const totals = wrapper.find('#totals');
   expect(app.exists()).toBe(true);
+  expect(dataTable.exists()).toBe(true);
+  expect(columns.exists()).toBe(true);
+  expect(accountData.exists()).toBe(true);
+  expect(totals.exists()).toBe(true);
 });

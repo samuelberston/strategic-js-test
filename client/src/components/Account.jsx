@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './Account.module.css';
 
-const Account = ({ account, select, checked, deleteMode, deleteAccount }) => {
+const Account = ({
+  account, select, checked, deleteMode, deleteAccount,
+}) => {
   const {
     id,
     creditorName,
@@ -13,7 +15,7 @@ const Account = ({ account, select, checked, deleteMode, deleteAccount }) => {
   } = account;
   return (
     <div id={id} className={css.account}>
-      <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
+      <div id={css.select} className={css.column} role="button" onClick={select} onKeyPress={select} value={id} tabIndex={0}>
         <input type="checkbox" value={id} checked={checked} />
       </div>
       <div id="creditor" className={css.column}>
@@ -25,7 +27,7 @@ const Account = ({ account, select, checked, deleteMode, deleteAccount }) => {
       <div id="lastName" className={css.column}>
         {lastName}
       </div>
-      <div id="minPay%" className={css.column}>
+      <div id="minPay" className={css.column}>
         {minPaymentPercentage}
         %
       </div>

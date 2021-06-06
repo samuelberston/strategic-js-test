@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
-    "babel-jest": "^27.0.2",
     "css-loader": "^5.2.6",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
@@ -38,18 +37,20 @@
     "@babel/preset-env": "^7.14.4",
     "@babel/preset-react": "^7.13.13",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^27.0.2",
     "babel-loader": "^8.2.2",
     "eslint": "^7.28.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "react-test-renderer": "^16.14.0"
   },
   "jest": {
     "setupFilesAfterEnv": [
       [
-        "<rootDir>src/jest.setup.js"
+        "jest-enzyme"
       ]
     ],
     "testEnvironment": "enzyme",

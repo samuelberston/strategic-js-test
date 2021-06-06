@@ -42,6 +42,13 @@
   padding: 10px;
 }
 
+#buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  padding: 5px;
+}
+
 button {
   margin: 10px;
   padding: 5px;
@@ -60,4 +67,12 @@ button {
 
 button:hover {
   background-color: rgb(92, 203, 211);
+}
+
+#deleteButton {
+  background-color: rgb(180, 72, 45);
+}
+
+#deleteButton:hover {
+  background-color: rgb(230, 92, 57);
 }

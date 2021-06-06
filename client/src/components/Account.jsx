@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './Account.module.css';
 
-const Account = ({ account, select, checked }) => {
+const Account = ({ account, select, checked, deleteMode, deleteAccount }) => {
   const {
     id,
     creditorName,
@@ -34,6 +34,14 @@ const Account = ({ account, select, checked }) => {
         {balance}
         .00
       </div>
+      {
+        deleteMode
+          ? (
+            <button id={id} className={css.deleteButton} type="button" onClick={deleteAccount}>
+              X
+            </button>
+          ) : ''
+      }
     </div>
   );
 };
@@ -42,6 +50,8 @@ Account.propTypes = {
   account: PropTypes.objectOf(PropTypes.any).isRequired,
   select: PropTypes.func.isRequired,
   checked: PropTypes.bool.isRequired,
+  deleteMode: PropTypes.bool.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
 };
 
 export default Account;

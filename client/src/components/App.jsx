@@ -15,12 +15,14 @@ class App extends React.Component {
       total: 0,
       allSelected: false,
       addDebtClicked: false,
+      deleteMode: false,
     };
     this.getAccounts = this.getAccounts.bind(this);
     this.select = this.select.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
     this.selectAll = this.selectAll.bind(this);
     this.addDebt = this.addDebt.bind(this);
+    this.deleteAccount = this.deleteAccount.bind(this);
   }
 
   componentDidMount() {
@@ -114,9 +116,24 @@ class App extends React.Component {
     });
   }
 
+  deleteAccount(e) {
+    e.preventDefault();
+    const { accounts } = this.state;
+    const { id } = e.target;
+    for (let i = 0; i < accounts.length; i += 1) {
+      if (accounts[i].id === Number(id)) {
+        accounts.splice(i, 1);
+      }
+    }
+    this.setState({
+      accounts,
+      deleteMode: false,
+    });
+  }
+
   render() {
     const {
-      accounts, selected, total, allSelected, addDebtClicked,
+      accounts, selected, total, allSelected, addDebtClicked, deleteMode,
     } = this.state;
     return (
       <div id="app">
@@ -162,44 +179,65 @@ class App extends React.Component {
                     checked = true;
                   }
                   return (
-                    <Account account={account} select={this.select} checked={checked} />
+                    <Account
+                      account={account}
+                      select={this.select}
+                      checked={checked}
+                      deleteMode={deleteMode}
+                      deleteAccount={this.deleteAccount}
+                    />
                   );
                 }))
               : ''}
           </div>
-          <div id="addDebtContainer">
-            {
-              !addDebtClicked
-                ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState({
-                        addDebtClicked: !addDebtClicked,
-                      });
-                    }}
-                  >
-                    Add Debt
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState({
-                        addDebtClicked: !addDebtClicked,
-                      });
-                    }}
-                  >
-                    Nevermind
-                  </button>
-                )
-            }
-            {
-              addDebtClicked
-                ? (
-                  <AddDebt addDebt={this.addDebt} />
-                ) : ''
-            }
+          <div id={css.buttonsContainer}>
+            <div id="addDebtContainer">
+              {
+                !addDebtClicked
+                  ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.setState({
+                          addDebtClicked: !addDebtClicked,
+                        });
+                      }}
+                    >
+                      Add Debt
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.setState({
+                          addDebtClicked: !addDebtClicked,
+                        });
+                      }}
+                    >
+                      Nevermind
+                    </button>
+                  )
+              }
+              {
+                addDebtClicked
+                  ? (
+                    <AddDebt addDebt={this.addDebt} />
+                  ) : ''
+              }
+            </div>
+            <div id="deleteDebtContainer">
+              <button
+                id={css.deleteButton}
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    deleteMode: !deleteMode,
+                  });
+                }}
+              >
+                Delete Accounts
+              </button>
+            </div>
           </div>
           <div id="totals" className={css.totals}>
             <div id="totalRows">

@@ -123,8 +123,8 @@ class App extends React.Component {
     accounts.push(account);
     this.setState({
       accounts,
+      addDebtClicked: false,
     });
-    console.log(accounts);
   }
 
   render() {
@@ -180,23 +180,6 @@ class App extends React.Component {
                 }))
               : ''}
           </div>
-          <div id="totals" className={css.totals}>
-            <div id="totalRows">
-              Total Row Count:
-              &nbsp;
-              {accounts.length}
-            </div>
-            <div id="totalChecked">
-              Check Row Count:
-              &nbsp;
-              {selected.length}
-            </div>
-            <div id="totalBalance">
-              Total Balance: $
-              {total}
-              .00
-            </div>
-          </div>
           <div id="addDebtContainer">
             {
               !addDebtClicked
@@ -216,6 +199,23 @@ class App extends React.Component {
                   <AddDebt addDebt={this.addDebt} />
                 ) : ''
             }
+          </div>
+          <div id="totals" className={css.totals}>
+            <div id="totalRows">
+              Total Row Count:
+              &nbsp;
+              {accounts.length}
+            </div>
+            <div id="totalChecked">
+              Check Row Count:
+              &nbsp;
+              {selected.length}
+            </div>
+            <div id="totalBalance">
+              Total Balance: $
+              {total}
+              .00
+            </div>
           </div>
         </div>
       </div>

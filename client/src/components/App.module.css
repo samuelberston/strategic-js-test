@@ -41,3 +41,23 @@
   margin: 10px;
   padding: 10px;
 }
+
+button {
+  margin: 10px;
+  padding: 5px;
+  justify-self: center;
+  height: 30px;
+  border-radius: 5px;
+  background-color: rgb(73, 147, 165);
+  color: rgb(235, 235, 235);
+  font-weight: 700;
+  font-family: Arial;
+  font-size: 13px;
+  border: none;
+  align-self: center;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: rgb(92, 203, 211);
+}

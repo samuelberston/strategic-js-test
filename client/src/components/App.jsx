@@ -114,6 +114,7 @@ class App extends React.Component {
       accounts,
       addDebtClicked: false,
     });
+    this.calculateTotal();
   }
 
   deleteAccount(e) {
@@ -128,6 +129,7 @@ class App extends React.Component {
     this.setState({
       accounts,
     });
+    this.calculateTotal();
   }
 
   render() {

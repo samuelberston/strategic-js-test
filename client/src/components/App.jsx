@@ -20,7 +20,6 @@ class App extends React.Component {
     this.select = this.select.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
     this.selectAll = this.selectAll.bind(this);
-    this.addDebtClick = this.addDebtClick.bind(this);
     this.addDebt = this.addDebt.bind(this);
   }
 
@@ -68,8 +67,6 @@ class App extends React.Component {
       this.setState({
         selected: [],
         total: 0,
-      });
-      this.setState({
         allSelected: false,
       });
     // select all
@@ -85,9 +82,6 @@ class App extends React.Component {
       this.setState({
         selected: tmp,
         total: tmp2,
-      });
-
-      this.setState({
         allSelected: true,
       });
     }
@@ -105,13 +99,6 @@ class App extends React.Component {
 
     this.setState({
       total,
-    });
-  }
-
-  addDebtClick() {
-    const { addDebtClicked } = this.state;
-    this.setState({
-      addDebtClicked: !addDebtClicked,
     });
   }
 
@@ -184,11 +171,25 @@ class App extends React.Component {
             {
               !addDebtClicked
                 ? (
-                  <button type="button" onClick={this.addDebtClick}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.setState({
+                        addDebtClicked: !addDebtClicked,
+                      });
+                    }}
+                  >
                     Add Debt
                   </button>
                 ) : (
-                  <button type="button" onClick={this.addDebtClick}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.setState({
+                        addDebtClicked: !addDebtClicked,
+                      });
+                    }}
+                  >
                     Nevermind
                   </button>
                 )

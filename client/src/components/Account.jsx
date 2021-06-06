@@ -13,17 +13,9 @@ const Account = ({ account, select, checked }) => {
   } = account;
   return (
     <div id={id} className={css.account}>
-      {checked
-        ? (
-          <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
-            <input type="checkbox" value={id} checked />
-          </div>
-        )
-        : (
-          <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
-            <input type="checkbox" value={id} />
-          </div>
-        )}
+      <div className={css.column} role="button" id={css.select} onClick={select} onKeyPress={select} value={id} tabIndex={0}>
+        <input type="checkbox" value={id} checked={checked} />
+      </div>
       <div id="creditor" className={css.column}>
         {creditorName}
       </div>

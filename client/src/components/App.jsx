@@ -127,7 +127,6 @@ class App extends React.Component {
     }
     this.setState({
       accounts,
-      deleteMode: false,
     });
   }
 
@@ -192,38 +191,21 @@ class App extends React.Component {
           </div>
           <div id={css.buttonsContainer}>
             <div id="addDebtContainer">
-              {
-                !addDebtClicked
-                  ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        this.setState({
-                          addDebtClicked: !addDebtClicked,
-                        });
-                      }}
-                    >
-                      Add Debt
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        this.setState({
-                          addDebtClicked: !addDebtClicked,
-                        });
-                      }}
-                    >
-                      Nevermind
-                    </button>
-                  )
-              }
-              {
-                addDebtClicked
-                  ? (
-                    <AddDebt addDebt={this.addDebt} />
-                  ) : ''
-              }
+              <button
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    addDebtClicked: !addDebtClicked,
+                    deleteMode: false,
+                  });
+                }}
+              >
+                {
+                  !addDebtClicked
+                    ? 'Add Debt'
+                    : 'Done Adding'
+                }
+              </button>
             </div>
             <div id="deleteDebtContainer">
               <button
@@ -232,13 +214,24 @@ class App extends React.Component {
                 onClick={() => {
                   this.setState({
                     deleteMode: !deleteMode,
+                    addDebtClicked: false,
                   });
                 }}
               >
-                Delete Accounts
+                {
+                  !deleteMode
+                    ? 'Delete Accounts'
+                    : 'Done Deleting'
+                }
               </button>
             </div>
           </div>
+          {
+            addDebtClicked
+              ? (
+                <AddDebt addDebt={this.addDebt} />
+              ) : ''
+          }
           <div id="totals" className={css.totals}>
             <div id="totalRows">
               Total Row Count:

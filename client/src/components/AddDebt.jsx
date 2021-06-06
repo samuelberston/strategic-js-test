@@ -40,11 +40,11 @@ class AddDebt extends React.Component {
           </label>
           <label htmlFor="%">
             Min Pay %
-            <input id="minPaymentPercentage" type="number" onChange={this.handleChange} required />
+            <input id="minPaymentPercentage" type="number" placeholder="%" onChange={this.handleChange} required />
           </label>
           <label htmlFor="balance">
             Balance
-            <input id="balance" type="number" onChange={this.handleChange} required />
+            <input id="balance" type="number" placeholder="$" onChange={this.handleChange} required />
           </label>
           <input id={css.submit} type="submit" value="Add Debt" />
         </form>

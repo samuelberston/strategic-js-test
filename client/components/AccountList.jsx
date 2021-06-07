@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Account from './Account.jsx';
 import AddDebt from './AddDebt.jsx';
-import css from './DataTable.module.css';
+import css from './AccountList.module.css';
 
-const DataTable = ({
+const AccountList = ({
   accounts,
   selected,
   total,
@@ -121,7 +121,7 @@ const DataTable = ({
   </div>
 );
 
-DataTable.propTypes = {
+AccountList.propTypes = {
   accounts: PropTypes.objectOf(PropTypes.any).isRequired,
   selected: PropTypes.arrayOf(PropTypes.any).isRequired,
   total: PropTypes.number.isRequired,
@@ -135,4 +135,4 @@ DataTable.propTypes = {
   deleteAccount: PropTypes.func.isRequired,
 };
 
-export default DataTable;
+export default AccountList;

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import DataTable from './DataTable.jsx';
+import AccountList from './AccountList.jsx';
 
 
 class App extends React.Component {
@@ -142,7 +142,7 @@ class App extends React.Component {
         <h1>
           Account Data
         </h1>
-        <DataTable
+        <AccountList
           accounts={accounts}
           selected={selected}
           total={total}

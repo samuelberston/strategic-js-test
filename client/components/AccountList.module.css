@@ -1,7 +1,7 @@
-.dataTable {
+.accountList {
   display: flex;
-  width: 700px;
   flex-direction: column;
+  width: 700px;
   border: 2px solid rgb(4, 6, 29);
   border-radius: 5px;
   background-color: rgb(238, 238, 238);
@@ -16,13 +16,13 @@
 }
 
 .column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 110px;
   padding: 3px;
   margin: 2px;
   border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: white;
 }
 
@@ -58,6 +58,7 @@ button {
   margin: 10px;
   padding: 5px;
   justify-self: center;
+  align-self: center;
   height: 30px;
   border-radius: 5px;
   background-color: rgb(73, 147, 165);
@@ -66,7 +67,6 @@ button {
   font-family: Arial;
   font-size: 13px;
   border: none;
-  align-self: center;
   transition: all 0.2s ease;
 }
 

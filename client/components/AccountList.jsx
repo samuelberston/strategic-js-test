@@ -34,16 +34,16 @@ class AccountList extends React.Component {
   selectAll = () => {
     const { accounts } = this.props;
     const { selected } = this.state;
+    let total = 0;
 
     // unselected all
     if (accounts.length === Object.keys(selected).length) {
       this.setState({
         selected: {},
-        total: 0,
+        total,
       });
     // select all
     } else {
-      let total = 0;
 
       accounts.forEach((acc) => {
         total += acc.balance;
@@ -98,7 +98,7 @@ class AccountList extends React.Component {
       deleteMode,
     } = this.state;
     return (
-      <div id="dataTable" className={css.dataTable}>
+      <div id="accountList" className={css.accountList}>
         <div id="columns" className={css.columns}>
           <div id={css.selectAll} className={css.column}>
             <div role="button" id="selectAll" onClick={this.selectAll} onKeyPress={this.selectAll} tabIndex={0}>
@@ -131,7 +131,7 @@ class AccountList extends React.Component {
             ? (
               accounts.map((account) => {
                 let checked;
-                if (selected[account.id]) {
+                if(selected[account.id]) {
                   checked = true;
                 } else {
                   checked = false;
@@ -204,7 +204,7 @@ class AccountList extends React.Component {
 };
 
 AccountList.propTypes = {
-  accounts: PropTypes.objectOf(PropTypes.any).isRequired,
+  accounts: PropTypes.arrayOf(PropTypes.any).isRequired,
   addDebt: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
 };

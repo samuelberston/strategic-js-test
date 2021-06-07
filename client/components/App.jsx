@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import css from './App.module.css';
-
 import DataTable from './DataTable.jsx';
 
 

@@ -6,11 +6,11 @@ class AddDebt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      creditorName: null,
-      firstName: null,
-      lastName: null,
-      minPaymentPercentage: null,
-      balance: null,
+      creditorName: '',
+      firstName: '',
+      lastName: '',
+      minPaymentPercentage: '',
+      balance: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }

@@ -9,7 +9,7 @@ class AccountList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: [],
+      selected: {},
       total: 0,
       addDebtCliked: false,
       deleteMode: false,
@@ -19,22 +19,15 @@ class AccountList extends React.Component {
   select = (e) => {
     const { accounts } = this.props;
     const { selected } = this.state;
-    const id = selected.indexOf(Number(e.target.value));
-    if (id !== -1) {
-      selected.splice(id, 1);
-      this.setState({
-        selected,
-      });
+
+    if(selected[e.target.value] !== undefined) {
+      delete selected[e.target.value];
     } else {
-      accounts.forEach((account) => {
-        if (Number(e.target.value) === Number(account.id)) {
-          selected.push(account.id);
-        }
-      });
-      this.setState({
-        selected,
-      });
+      selected[e.target.value] = true;
     }
+    this.setState({
+      selected,
+    });
     this.calculateTotal();
   }
 
@@ -43,21 +36,22 @@ class AccountList extends React.Component {
     const { selected } = this.state;
 
     // unselected all
-    if (accounts.length === selected.length) {
+    if (accounts.length === Object.keys(selected).length) {
       this.setState({
-        selected: [],
+        selected: {},
         total: 0,
       });
     // select all
     } else {
       let total = 0;
 
-      accounts.forEach((account) => {
-        total += account.balance;
+      accounts.forEach((acc) => {
+        total += acc.balance;
+        selected[acc.id] = true;
       });
 
       this.setState({
-        selected: accounts.map((acc) => acc.id),
+        selected,
         total,
        });
     }
@@ -69,7 +63,7 @@ class AccountList extends React.Component {
     const { selected } = this.state;
 
     accounts.forEach((account) => {
-      if (selected.includes(account.id)) {
+      if (selected[account.id] !== undefined) {
         total += account.balance;
       }
     });
@@ -108,7 +102,7 @@ class AccountList extends React.Component {
         <div id="columns" className={css.columns}>
           <div id={css.selectAll} className={css.column}>
             <div role="button" id="selectAll" onClick={this.selectAll} onKeyPress={this.selectAll} tabIndex={0}>
-              {selected.length === accounts.length && accounts.length !== 0
+              {Object.keys(selected).length === accounts.length && accounts.length !== 0
                 ? (
                   <input type="checkbox" checked />
                 ) : (
@@ -137,10 +131,10 @@ class AccountList extends React.Component {
             ? (
               accounts.map((account) => {
                 let checked;
-                if (!selected.includes(account.id)) {
-                  checked = false;
-                } else {
+                if (selected[account.id]) {
                   checked = true;
+                } else {
+                  checked = false;
                 }
                 return (
                   <Account
@@ -196,7 +190,7 @@ class AccountList extends React.Component {
           <div id="totalChecked">
             Check Row Count:
             &nbsp;
-            {selected.length}
+            {Object.keys(selected).length}
           </div>
           <div id="totalBalance">
             Total Balance: $

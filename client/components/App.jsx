@@ -9,10 +9,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       accounts: [],
-      selected: [],
-      total: 0,
-      addDebtClicked: false,
-      deleteMode: false,
     };
   }
 
@@ -26,83 +22,8 @@ class App extends React.Component {
         this.setState({
           accounts: res.data,
         });
-      });
-  }
-
-  select = (e) => {
-    const { accounts, selected } = this.state;
-    const id = selected.indexOf(Number(e.target.value));
-    if (id !== -1) {
-      selected.splice(id, 1);
-      this.setState({
-        selected,
-      });
-    } else {
-      accounts.forEach((account) => {
-        if (Number(e.target.value) === Number(account.id)) {
-          selected.push(account.id);
-        }
-      });
-      this.setState({
-        selected,
-      });
-    }
-    this.calculateTotal();
-  }
-
-  selectAll = () => {
-    const { accounts, selected } = this.state;
-
-    // unselected all
-    if (accounts.length === selected.length) {
-      this.setState({
-        selected: [],
-        total: 0,
-      });
-    // select all
-    } else {
-      let total = 0;
-
-      accounts.forEach((account) => {
-        total += account.balance;
-      });
-
-      this.setState({
-        selected: accounts.map((acc) => acc.id),
-        total,
-       });
-    }
-  }
-
-  calculateTotal = () => {
-    let total = 0;
-    const { selected, accounts } = this.state;
-
-    accounts.forEach((account) => {
-      if (selected.includes(account.id)) {
-        total += account.balance;
-      }
-    });
-
-    this.setState({
-      total,
-    });
-  }
-
-  addDebtClick = () => {
-    const { addDebtClicked } = this.state;
-    this.setState({
-      addDebtClicked: !addDebtClicked,
-      deleteMode: false,
-    });
-  }
-
-  deleteClick = () => {
-    const { deleteMode } = this.state;
-    this.setState({
-      deleteMode: !deleteMode,
-      addDebtClicked: false,
-    });
+      })
+      .catch((err) => console.error(err));
   }
 
   addDebt = (e, account) => {
@@ -133,9 +54,11 @@ class App extends React.Component {
     this.calculateTotal();
   }
 
+
+
   render() {
     const {
-      accounts, selected, total, addDebtClicked, deleteMode,
+      accounts, selected,
     } = this.state;
     return (
       <div id="app">
@@ -144,15 +67,7 @@ class App extends React.Component {
         </h1>
         <AccountList
           accounts={accounts}
-          selected={selected}
-          total={total}
-          addDebtClicked={addDebtClicked}
-          deleteMode={deleteMode}
-          select={this.select}
-          selectAll={this.selectAll}
-          addDebtClick={this.addDebtClick}
           addDebt={this.addDebt}
-          deleteClick={this.deleteClick}
           deleteAccount={this.deleteAccount}
         />
       </div>

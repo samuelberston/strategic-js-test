@@ -36,10 +36,9 @@ class App extends React.Component {
       accounts,
       addDebtClicked: false,
     });
-    this.calculateTotal();
   }
 
-  deleteAccount = (e) => {
+  deleteAccount = (e, cb) => {
     e.preventDefault();
     const { accounts } = this.state;
     const { id } = e.target;
@@ -51,7 +50,7 @@ class App extends React.Component {
     this.setState({
       accounts,
     });
-    this.calculateTotal();
+    cb();
   }
 
 

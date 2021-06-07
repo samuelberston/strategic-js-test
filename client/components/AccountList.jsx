@@ -95,9 +95,6 @@ class AccountList extends React.Component {
     });
   }
 
-
-
-
   render() {
     const { accounts, addDebt, deleteAccount } = this.props;
     const {
@@ -151,7 +148,7 @@ class AccountList extends React.Component {
                     select={this.select}
                     checked={checked}
                     deleteMode={deleteMode}
-                    deleteAccount={deleteAccount}
+                    deleteAccount={(e) => deleteAccount(e, this.calculateTotal)}
                   />
                 );
               }))

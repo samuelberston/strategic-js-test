@@ -25,7 +25,7 @@ class AddDebt extends React.Component {
     const { addDebt } = this.props;
     return (
       <div id="addDebt" className={css.addDebt}>
-        <form id="form" className={css.form} onSubmit={(e) => { addDebt(e, this.state)}}>
+        <form id="form" className={css.form} onSubmit={(e) => { addDebt(e, this.state); }}>
           <label htmlFor="creditorName">
             Creditor Name
             <input id="creditorName" type="text" placeholder="creditor" onChange={this.handleChange} required />

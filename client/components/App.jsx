@@ -34,7 +34,6 @@ class App extends React.Component {
     accounts.push(account);
     this.setState({
       accounts,
-      addDebtClicked: false,
     });
   }
 
@@ -52,8 +51,6 @@ class App extends React.Component {
     });
     cb();
   }
-
-
 
   render() {
     const {

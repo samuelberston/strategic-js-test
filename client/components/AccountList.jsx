@@ -11,7 +11,7 @@ class AccountList extends React.Component {
     this.state = {
       selected: {},
       total: 0,
-      addDebtCliked: false,
+      addDebtClicked: false,
       deleteMode: false,
     }
   }

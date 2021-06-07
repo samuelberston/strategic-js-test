@@ -13,7 +13,5 @@ global.window = doc.defaultView;
 it('should render the app', () => {
   const wrapper = shallow(<App />);
   const app = wrapper.find('#app');
-
   expect(app.exists()).toBe(true);
-
 });

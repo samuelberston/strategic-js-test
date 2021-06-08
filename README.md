@@ -1,6 +1,5 @@
 # strategic-js-test
 
-Description
 React app displaying bank account data with basic CRUD functionality
 
 Starting the application
